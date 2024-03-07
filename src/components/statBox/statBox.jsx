@@ -2,8 +2,17 @@ import { useId } from 'react';
 
 import './statBox.scss';
 
-export default function StatBox({ children }) {
-    const id = useId();
+export default function StatBox({ children, score, mod, handleModChange, handleScoreChange }) {
+    const modId = useId();
+    const scoreId = useId();
+
+    function saveModChange(event) {
+        handleModChange(event.target.value);
+    }
+
+    function saveScoreChange(event) {
+        handleScoreChange(event.target.value);
+    }
 
     return(
         <>
@@ -12,12 +21,22 @@ export default function StatBox({ children }) {
                     { children }
                 </div>
                 <div className="stat-box">
-                    <label htmlFor={id}>Score</label>
-                    <input id={id} type="number" />
+                    <label htmlFor={scoreId}>Score</label>
+                    <input
+                        id={scoreId}
+                        type="number"
+                        value={score}
+                        onChange={saveScoreChange}
+                    />
                 </div>
                 <div className="stat-box">
-                    <label htmlFor={id}>Modifier</label>
-                    <input id={id} type="number" />
+                    <label htmlFor={modId}>Modifier</label>
+                    <input
+                        id={modId}
+                        type="number"
+                        value={mod}
+                        onChange={saveModChange}
+                    />
                 </div>
             </div>
         </>
