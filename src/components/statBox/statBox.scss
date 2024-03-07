@@ -1,0 +1,19 @@
+.stat {
+    display: flex;
+    flex-direction: column;
+    padding: 0 5px 0 5px;
+}
+
+.stat-title {
+    padding: 0;
+}
+
+.stat-box {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid white;
+
+    label {
+        padding-right: 5px;
+    }
+}

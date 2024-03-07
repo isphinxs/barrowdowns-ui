@@ -1,0 +1,43 @@
+.character-sheet {
+    // display: flex;
+    max-width: 1500px;
+    padding: 50px;
+}
+
+.combat-section,
+.misc-section,
+.sheet-header,
+.stat-section {
+    display: flex;
+    padding-top: 50px;
+
+}
+
+.combat-section {
+    // display: flex;
+    // flex-direction: column;
+
+    .top-row, .bottom-row {
+        // display: flex;
+        // justify-content: space-between;
+        padding: 5px;
+        outline: 1px solid white;
+
+        label {
+            padding-right: 10px;
+        }
+    }
+}
+
+.sheet-header,
+.misc-section {
+    flex-direction: column;
+
+    label {
+        align-self: flex-start;
+    }
+}
+
+input:hover {
+    cursor: pointer;
+}
