@@ -1,242 +1,232 @@
-import { useState } from 'react';
-
 import './characterSheet.scss';
 import NumberBox from "../numberBox/numberBox";
 import StatBox from "../statBox/statBox";
 import TextAreaBox from '../textAreaBox/textAreaBox';
 import TextBox from "../textBox/textBox";
 
-export default function CharacterSheet({ children }) {
-    const updateCharacter = () => {
-        convertToBase64();
-    }
+export default function CharacterSheet({ characterNumber, character, onUpdate }) {
+    const updateCharacter = (key, value) => {
+        const newCharacter = { ...character };
+        newCharacter[key] = value;
 
-    const convertToBase64 = () => {
-        console.log('converting...');
-        const data = {
-            number: 1
-        };
-        const json = btoa(JSON.stringify(data));
-        console.log('encoded string', json);
-        decodeBase64(json);
+        // TODO determine why numbers are being converted to strings here
+        console.log('character', newCharacter);
+        onUpdate(characterNumber, newCharacter);
     }
-
-    const decodeBase64 = (b64) => {
-        console.log('decoding...');
-        const json = atob(b64);
-        console.log('json', json);
-    }
-
-    // Text handlers
-    const [name, setName] = useState('');
-    const [species, setSpecies] = useState('');
-    const [occupation, setOccupation] = useState('');
-    const [alignment, setAlignment] = useState('');
 
     function handleNameChange(text) {
-        setName(text);
+        updateCharacter('name', text);
     }
-
+    
     function handleSpeciesChange(text) {
-        setSpecies(text);
+        updateCharacter('species', text);
     }
 
     function handleOccupationChange(text) {
-        setOccupation(text);
+        updateCharacter('occupation', text);
     }
 
     function handleAlignmentChange(text) {
-        setAlignment(text);
+        updateCharacter('alignment', text);
     }
-
-    // Number handlers
-    const [flesh, setFlesh] = useState(0);
-    const [armor, setArmor] = useState(0);
-    const [melee, setMelee] = useState(0);
-    const [ranged, setRanged] = useState(0);
-    const [ammo, setAmmo] = useState(0);
     
     function handleFleshChange(number) {
-        setFlesh(number);
-        updateCharacter();
+        updateCharacter('flesh', number);
     }
     
     function handleArmorChange(number) {
-        setArmor(number);
-        updateCharacter();
+        updateCharacter('armor', number);
     }
     
     function handleMeleeChange(number) {
-        setMelee(number);
-        updateCharacter();
+        updateCharacter('melee', number);
     }
     
     function handleRangedChange(number) {
-        setRanged(number);
-        updateCharacter();
+        updateCharacter('ranged', number);
     }
     
     function handleAmmoChange(number) {
-        setAmmo(number);
-        updateCharacter();
+        updateCharacter('ammo', number);
     }
     
-    // Stat handlers
-    const [strScore, setStrScore] = useState(0);
-    const [strMod, setStrMod] = useState(0);
-    const [intScore, setIntScore] = useState(0);
-    const [intMod, setIntMod] = useState(0);
-    const [dexScore, setDexScore] = useState(0);
-    const [dexMod, setDexMod] = useState(0);
-    const [wisScore, setWisScore] = useState(0);
-    const [wisMod, setWisMod] = useState(0);
-    const [conScore, setConScore] = useState(0);
-    const [conMod, setConMod] = useState(0);
-    const [charScore, setCharScore] = useState(0);
-    const [charMod, setCharMod] = useState(0);
-    
     function handleStrScoreChange(number) {
-        setStrScore(number);
-        updateCharacter();
+        updateCharacter('strScore', number);
     }
     
     function handleStrModChange(number) {
-        setStrMod(number);
-        updateCharacter();
+        updateCharacter('strMod', number);
     }
     
     function handleIntScoreChange(number) {
-        setIntScore(number);
-        updateCharacter();
+        updateCharacter('intScore', number);
     }
     
     function handleIntModChange(number) {
-        setIntMod(number);
-        updateCharacter();
+        updateCharacter('intMod', number);
     }
     
     function handleDexScoreChange(number) {
-        setDexScore(number);
-        updateCharacter();
+        updateCharacter('dexScore', number);
     }
     
     function handleDexModChange(number) {
-        setDexMod(number);
-        updateCharacter();
+        updateCharacter('dexMod', number);
     }
     
     function handleWisScoreChange(number) {
-        setWisScore(number);
-        updateCharacter();
+        updateCharacter('wisScore', number);
     }
     
     function handleWisModChange(number) {
-        setWisMod(number);
-        updateCharacter();
+        updateCharacter('wisMod', number);
     }
     
     function handleConScoreChange(number) {
-        setConScore(number);
-        updateCharacter();
+        updateCharacter('conScore', number);
     }
     
     function handleConModChange(number) {
-        setConMod(number);
-        updateCharacter();
+        updateCharacter('conMod', number);
     }
     
     function handleCharScoreChange(number) {
-        setCharScore(number);
-        updateCharacter();
+        updateCharacter('charScore', number);
     }
     
     function handleCharModChange(number) {
-        setCharMod(number);
-        updateCharacter();
+        updateCharacter('charMod', number);
     }
     
-    // Text area handlers
-    const [equipment, setEquipment] = useState('');
-    const [notes, setNotes] = useState('');
-    
-    function handleEquipmentChange(number) {
-        setEquipment(number);
-        updateCharacter();
+    function handleEquipmentChange(text) {
+        updateCharacter('equipment', text);
     }
     
-    function handleNotesChange(number) {
-        setNotes(number);
-        updateCharacter();
+    function handleNotesChange(text) {
+        updateCharacter('notes', text);
     }
 
     return(
         <>
-            <button onClick={convertToBase64}>Exporttttt</button>
-            <div className="sheet-number">{children}</div>
+            <div className="sheet-number">{characterNumber} {name}</div>
+
             <div className="sheet-header">
-                <TextBox text={name} handleTextChange={handleNameChange}>Name</TextBox>
-                <TextBox text={species} handleTextChange={handleSpeciesChange}>Species</TextBox>
-                <TextBox text={occupation} handleTextChange={handleOccupationChange}>Occupation</TextBox>
-                <TextBox text={alignment} handleTextChange={handleAlignmentChange}>Alignment</TextBox>
+                <TextBox
+                    text={character.name}
+                    handleTextChange={handleNameChange}
+                    name="name"
+                >Name</TextBox>
+                <TextBox
+                    text={character.species}
+                    handleTextChange={handleSpeciesChange}
+                    name="species"
+                >Species</TextBox>
+                <TextBox
+                    text={character.occupation}
+                    handleTextChange={handleOccupationChange}
+                    name="occupation"
+                >Occupation</TextBox>
+                <TextBox
+                    text={character.alignment}
+                    handleTextChange={handleAlignmentChange}
+                    name="alignment"
+                >Alignment</TextBox>
             </div>
+
             <div className="combat-section">
                 <div className="top-row">
-                    <NumberBox number={flesh} handleNumberChange={handleFleshChange}>Flesh</NumberBox>
-                    <NumberBox number={armor} handleNumberChange={handleArmorChange}>Armor</NumberBox>
+                    <NumberBox
+                        number={character.flesh}
+                        handleNumberChange={handleFleshChange}
+                        name="flesh"
+                    >Flesh</NumberBox>
+                    <NumberBox
+                        number={character.armor}
+                        handleNumberChange={handleArmorChange}
+                        name="armor"
+                    >Armor</NumberBox>
                 </div>
                 <div className="bottom-row">
-                    <NumberBox number={melee} handleNumberChange={handleMeleeChange}>Melee</NumberBox>
-                    <NumberBox number={ranged} handleNumberChange={handleRangedChange}>Ranged</NumberBox>
-                    <NumberBox number={ammo} handleNumberChange={handleAmmoChange}>Ammo Die</NumberBox>
+                    <NumberBox
+                        number={character.melee}
+                        handleNumberChange={handleMeleeChange}
+                        name="melee"
+                    >Melee</NumberBox>
+                    <NumberBox
+                        number={character.ranged}
+                        handleNumberChange={handleRangedChange}
+                        name="ranged"
+                    >Ranged</NumberBox>
+                    <NumberBox
+                        number={character.ammo}
+                        handleNumberChange={handleAmmoChange}
+                        name="ammo"
+                    >Ammo Die</NumberBox>
                 </div>
             </div>
+
             <div className="stat-section">
                 <div className="top-row">
                     <StatBox
-                        score={strScore}
-                        mod={strMod}
+                        score={character.strScore}
+                        mod={character.strMod}
                         handleScoreChange={handleStrScoreChange}
                         handleModChange={handleStrModChange}
+                        name="strength"
                     >Strength</StatBox>
                     <StatBox
-                        score={intScore}
-                        mod={intMod}
+                        score={character.intScore}
+                        mod={character.intMod}
                         handleScoreChange={handleIntScoreChange}
                         handleModChange={handleIntModChange}
+                        name="intelligence"
                     >Intelligence</StatBox>
                 </div>
                 <div className="middle-row">
                     <StatBox
-                        score={dexScore}
-                        mod={dexMod}
+                        score={character.dexScore}
+                        mod={character.dexMod}
                         handleScoreChange={handleDexScoreChange}
                         handleModChange={handleDexModChange}
+                        name="dexterity"
                     >Dexterity</StatBox>
                     <StatBox
-                        score={wisScore}
-                        mod={wisMod}
+                        score={character.wisScore}
+                        mod={character.wisMod}
                         handleScoreChange={handleWisScoreChange}
                         handleModChange={handleWisModChange}
+                        name="wisdom"
                     >Wisdom</StatBox>
                 </div>
                 <div className="bottom-row">
                     <StatBox
-                        score={conScore}
-                        mod={conMod}
+                        score={character.conScore}
+                        mod={character.conMod}
                         handleScoreChange={handleConScoreChange}
                         handleModChange={handleConModChange}
+                        name="constitution"
                     >Constitution</StatBox>
                     <StatBox
-                        score={charScore}
-                        mod={charMod}
+                        score={character.charScore}
+                        mod={character.charMod}
                         handleScoreChange={handleCharScoreChange}
                         handleModChange={handleCharModChange}
+                        name="charisma"
                     >Charisma</StatBox>
                 </div>
             </div>
+
             <div className="misc-section">
-                <TextAreaBox textArea={equipment} handleTextAreaChange={handleEquipmentChange}>Equipment</TextAreaBox>
-                <TextAreaBox textArea={notes} handleTextAreaChange={handleNotesChange}>Notes</TextAreaBox>
+                <TextAreaBox
+                    textArea={character.equipment}
+                    handleTextAreaChange={handleEquipmentChange}
+                    name="equipment"
+                >Equipment</TextAreaBox>
+                <TextAreaBox
+                    textArea={character.notes}
+                    handleTextAreaChange={handleNotesChange}
+                    name="notes"
+                >Notes</TextAreaBox>
             </div>
         </>
     );

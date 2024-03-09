@@ -7,6 +7,12 @@
   text-align: center;
 }
 
+.instructions {
+  .display-url {
+    max-width: 500px;
+  }
+}
+
 .character-sheet {
   display: flex;
 
