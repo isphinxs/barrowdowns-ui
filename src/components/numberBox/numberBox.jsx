@@ -1,5 +1,7 @@
 import { useId } from "react";
 
+import './numberBox.scss';
+
 export default function NumberBox({ children, number, handleNumberChange }) {
     const id = useId();
 
@@ -10,7 +12,7 @@ export default function NumberBox({ children, number, handleNumberChange }) {
     return(
         <>
             <div className="number-box">
-                <label htmlFor={id}>{ children }</label>
+                <label htmlFor={id}>{children}</label>
                 <input
                     id={id}
                     type="number"

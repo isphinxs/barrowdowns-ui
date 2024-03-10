@@ -1,40 +1,75 @@
 .character-sheet {
-    // display: flex;
+    display: flex;
+    flex-direction: column;
     max-width: 1500px;
-    padding: 50px;
-    outline: 1px solid white;
+    padding: 24px;
+    margin: 12px;
+    border: 1px solid white;
 }
 
-.sheet-number {
-    font-weight: bold;
+.sheet-header {
+    display: flex;
+    justify-content: space-between;
+
+    label {
+        align-self: flex-start;
+    }
+    
+    .sheet-number {
+        padding: 0 0 16px 0;
+        font-weight: bold;
+    }
+}
+
+.sheet-top {
+    display: flex;
 }
 
 .combat-section,
 .misc-section,
-.sheet-header,
+.sheet-bio,
 .stat-section {
     display: flex;
-    padding-top: 50px;
+    padding-bottom: 16px;
 
+}
+
+.sheet-bio {
+    flex-grow: 2;
+    padding-right: 16px;
 }
 
 .combat-section {
-    // display: flex;
-    // flex-direction: column;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
 
     .top-row, .bottom-row {
-        // display: flex;
-        // justify-content: space-between;
+        display: flex;
+        justify-content: space-between;
         padding: 5px;
-        outline: 1px solid white;
+        border: 1px solid white;
 
         label {
+            align-self: flex-start;
             padding-right: 10px;
         }
     }
+
+    .top-row {
+        .flesh {
+            label {
+                padding-right: 25px;
+            }
+        }
+    }
+
+    .bottom-row {
+        border-top: none;
+    }
 }
 
-.sheet-header,
+.sheet-bio,
 .misc-section {
     flex-direction: column;
 

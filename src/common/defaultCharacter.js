@@ -22,4 +22,5 @@ export const defaultCharacter = {
     charMod: 0,
     equipment: '',
     notes: '',
+    isDead: false,
 }

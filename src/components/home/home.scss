@@ -1,0 +1,18 @@
+.instructions {
+    padding: 50px;
+
+    // .display-url {
+    //   max-width: 500px;
+    // }
+}
+
+  
+.dead {
+    background-color: rgb(75, 75, 75);
+}
+
+.character-sheets {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

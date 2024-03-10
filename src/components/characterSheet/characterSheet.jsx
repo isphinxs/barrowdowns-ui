@@ -1,3 +1,5 @@
+import { useId } from 'react';
+
 import './characterSheet.scss';
 import NumberBox from "../numberBox/numberBox";
 import StatBox from "../statBox/statBox";
@@ -5,6 +7,8 @@ import TextAreaBox from '../textAreaBox/textAreaBox';
 import TextBox from "../textBox/textBox";
 
 export default function CharacterSheet({ characterNumber, character, onUpdate }) {
+    const id = useId();
+
     const updateCharacter = (key, value) => {
         const newCharacter = { ...character };
         newCharacter[key] = value;
@@ -106,62 +110,78 @@ export default function CharacterSheet({ characterNumber, character, onUpdate })
         updateCharacter('notes', text);
     }
 
+    function handleIsDeadChange() {
+        updateCharacter('isDead', !character.isDead);
+    }
+
     return(
         <>
-            <div className="sheet-number">{characterNumber} {name}</div>
-
             <div className="sheet-header">
-                <TextBox
-                    text={character.name}
-                    handleTextChange={handleNameChange}
-                    name="name"
-                >Name</TextBox>
-                <TextBox
-                    text={character.species}
-                    handleTextChange={handleSpeciesChange}
-                    name="species"
-                >Species</TextBox>
-                <TextBox
-                    text={character.occupation}
-                    handleTextChange={handleOccupationChange}
-                    name="occupation"
-                >Occupation</TextBox>
-                <TextBox
-                    text={character.alignment}
-                    handleTextChange={handleAlignmentChange}
-                    name="alignment"
-                >Alignment</TextBox>
+                <div className="sheet-number">{characterNumber} {character.name}</div>
+                <div className="is-dead">
+                    <label htmlFor={id}>Dead?</label>
+                    <input id={id} type="checkbox" onChange={handleIsDeadChange} />
+                </div>
             </div>
 
-            <div className="combat-section">
-                <div className="top-row">
-                    <NumberBox
-                        number={character.flesh}
-                        handleNumberChange={handleFleshChange}
-                        name="flesh"
-                    >Flesh</NumberBox>
-                    <NumberBox
-                        number={character.armor}
-                        handleNumberChange={handleArmorChange}
-                        name="armor"
-                    >Armor</NumberBox>
+            <div className='sheet-top'>
+                <div className="sheet-bio">
+                    <TextBox
+                        text={character.name}
+                        handleTextChange={handleNameChange}
+                        name="name"
+                    >Name</TextBox>
+                    <TextBox
+                        text={character.species}
+                        handleTextChange={handleSpeciesChange}
+                        name="species"
+                    >Species</TextBox>
+                    <TextBox
+                        text={character.occupation}
+                        handleTextChange={handleOccupationChange}
+                        name="occupation"
+                    >Occupation</TextBox>
+                    <TextBox
+                        text={character.alignment}
+                        handleTextChange={handleAlignmentChange}
+                        name="alignment"
+                    >Alignment</TextBox>
                 </div>
-                <div className="bottom-row">
-                    <NumberBox
-                        number={character.melee}
-                        handleNumberChange={handleMeleeChange}
-                        name="melee"
-                    >Melee</NumberBox>
-                    <NumberBox
-                        number={character.ranged}
-                        handleNumberChange={handleRangedChange}
-                        name="ranged"
-                    >Ranged</NumberBox>
-                    <NumberBox
-                        number={character.ammo}
-                        handleNumberChange={handleAmmoChange}
-                        name="ammo"
-                    >Ammo Die</NumberBox>
+
+                <div className="combat-section">
+                    <div className="top-row">
+                        <div className="flesh">
+                            <NumberBox
+                                number={character.flesh}
+                                handleNumberChange={handleFleshChange}
+                                name="flesh"
+                            >Flesh</NumberBox>
+                        </div>
+                        <NumberBox
+                            number={character.armor}
+                            handleNumberChange={handleArmorChange}
+                            name="armor"
+                        >Armor</NumberBox>
+                    </div>
+                    <div className="bottom-row">
+                        <div className="stacked-box">
+                            <NumberBox
+                                number={character.melee}
+                                handleNumberChange={handleMeleeChange}
+                                name="melee"
+                            >Melee</NumberBox>
+                            <NumberBox
+                                number={character.ranged}
+                                handleNumberChange={handleRangedChange}
+                                name="ranged"
+                            >Ranged</NumberBox>
+                        </div>
+                        <NumberBox
+                            number={character.ammo}
+                            handleNumberChange={handleAmmoChange}
+                            name="ammo"
+                        >Ammo Die</NumberBox>
+                    </div>
                 </div>
             </div>
 

@@ -1,7 +1,7 @@
 .stat {
     display: flex;
     flex-direction: column;
-    padding: 0 5px 0 5px;
+    padding: 0 16px 0 0;
 }
 
 .stat-title {
@@ -11,9 +11,14 @@
 .stat-box {
     display: flex;
     justify-content: space-between;
+    padding: 5px;
     border: 1px solid white;
 
     label {
         padding-right: 5px;
     }
+}
+
+.stat-score {
+    border-bottom: none;
 }

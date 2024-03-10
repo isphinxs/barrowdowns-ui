@@ -20,7 +20,7 @@ export default function StatBox({ children, score, mod, handleModChange, handleS
                 <div className="stat-title">
                     { children }
                 </div>
-                <div className="stat-box">
+                <div className="stat-box stat-score">
                     <label htmlFor={scoreId}>Score</label>
                     <input
                         id={scoreId}
@@ -29,7 +29,7 @@ export default function StatBox({ children, score, mod, handleModChange, handleS
                         onChange={saveScoreChange}
                     />
                 </div>
-                <div className="stat-box">
+                <div className="stat-box stat-mod">
                     <label htmlFor={modId}>Modifier</label>
                     <input
                         id={modId}
